@@ -1,0 +1,44 @@
+.card-item{
+  --gray:#919191;
+  --black:#000;
+  height: 100%;
+  max-width: 350px;
+  color: var(--black);
+  background-color: white;
+  border-radius: 0.5rem;
+  display: flex;
+
+  .card-image{
+    border-radius: 0.5rem;
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-right: 1rem;
+    margin-left: 0.5rem;
+
+  }
+
+  .card-content{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .title {
+    font-weight: 800;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .label {
+    font-weight: 400;
+    margin-bottom: 0.2rem;
+  }
+
+  .name-country {
+    display: flex;
+    flex-direction: column;
+  }
+}
