@@ -1,1 +1,7 @@
-<p>country-list works!</p>
+<!--{{countries|async|json}}-->
+
+<div class="container">
+  <div class="cards">
+    <app-country-card *ngFor="let country of countries|async" [country]="country"></app-country-card>
+  </div>
+</div>
