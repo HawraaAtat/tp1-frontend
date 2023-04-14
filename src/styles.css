@@ -5,6 +5,11 @@
 /*//  --white:#F4F4F4;*/
 /*//  --gray:#919191*/
 /*//}*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+
 body{
   background: #f4f4f4;
+  font-family: 'Poppins', sans-serif;
 }

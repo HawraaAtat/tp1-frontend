@@ -2,7 +2,7 @@
   --gray:#919191;
   --black:#000;
   height: 100%;
-  max-width: 350px;
+  width: 350px;
   color: var(--black);
   background-color: white;
   border-radius: 0.5rem;
@@ -40,5 +40,10 @@
   .name-country {
     display: flex;
     flex-direction: column;
+  }
+}
+@media screen and (min-width: 992px) and (max-width: 1204px) {
+  .card-item{
+    width: 100%;
   }
 }

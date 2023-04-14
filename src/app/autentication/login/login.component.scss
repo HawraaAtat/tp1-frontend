@@ -1,0 +1,111 @@
+.page {
+  display: flex;
+  justify-content: start;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 550px;
+  margin-left: 40px;
+
+
+  img {
+    margin-bottom: 30px;
+
+    @media (max-width: 768px) {
+      margin-bottom: 60px;
+    }
+
+  }
+
+  h1 {
+    font-weight: 600;
+  }
+
+  p {
+    font-weight: 500;
+  }
+
+  a {
+    font-weight: 600;
+    color: #3a89b7;
+    text-decoration: none;
+    cursor: pointer;
+
+    @media (max-width: 500px) {
+      display: block;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  form {
+    padding-top: 50px;
+  }
+
+  input {
+    background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+    border-radius: 7px;
+  }
+
+  button {
+    margin-left: auto;
+    margin-top: 30px;
+    display: flex;
+    padding: 8px 50px;
+    border-radius: 30px;
+    background-color: #3d8d7b;
+    color: white;
+    border-width: 0;
+    cursor: pointer;
+
+    @media (max-width: 500px) {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    &:hover {
+      opacity: 70%;
+    }
+  }
+}
+
+.background {
+  opacity: 60%;
+  z-index: -1;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 700px;
+  object-fit: cover;
+  height: 100%;
+  mask-image: linear-gradient(to right, transparent, white);
+}
+
+@media (max-width: 1290px) {
+  .background {
+    width: 400px;
+  }
+}
+@media (max-width: 998px) {
+  .background {
+    width: 300px;
+  }
+}
+@media (max-width: 886px) {
+  .background {
+    width: 0px;
+  }
+}

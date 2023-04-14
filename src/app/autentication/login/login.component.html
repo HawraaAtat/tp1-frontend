@@ -1,0 +1,24 @@
+<div class="container">
+  <img style="width: 150px" src="assets/logo_blue.png" alt="countrees-logo" />
+  <h1>Log in</h1>
+  <p>Don't have an account? <a [routerLink]="['/signup']">Sign up</a></p>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <input type="email" placeholder="Email" formControlName="username" />
+    <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+      <div class="error-message" *ngIf="loginForm.get('username')?.errors?.['required']">Email is required</div>
+      <div class="error-message" *ngIf="loginForm.get('username')?.errors?.['email']">Invalid email format</div>
+    </div>
+    <input type="password" placeholder="Password" formControlName="password" />
+    <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+      <div class="error-message" *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</div>
+      <div class="error-message" *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 3 characters long</div>
+    </div>
+    <button type="submit">Log in</button>
+  </form>
+
+  <div>
+    <img class="background" src="assets/login-background.jpg" alt="auth-background"/>
+  </div>
+</div>
+
