@@ -1,8 +1,6 @@
-<!--{{countries|async|json}}-->
 <div class="wrapper">
   <div class="container mx-auto">
     <div class="d-flex justify-content-between align-items-center">
-      <!--      <a [routerLink]="['/']">logo</a>-->
       <img style="width: 80px" src="/assets/logo_white.png" alt="countries logo">
       <div>
         <span class="d-flex justify-content-center align-items-center">
@@ -13,13 +11,23 @@
   </div>
 </div>
 
-
 <div class="container">
-<!--  <div class="d-flex flex-column flex-sm-row justify-content-between">-->
-<!--    <div>Search Component</div>-->
-<!--    <div>Filter Component</div>-->
-<!--  </div>-->
+  <div class="d-flex flex-column flex-sm-row justify-content-between">
+    <div>
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Search by name or region" (input)="onSearch()">
+    </div>
+    <div>
+      <select [(ngModel)]="filterTerm" multiple (change)="onFilter()">
+        <option value="All">All</option>
+        <option value="Africa">Africa</option>
+        <option value="Americas">Americas</option>
+        <option value="Asia">Asia</option>
+        <option value="Europe">Europe</option>
+        <option value="Oceania">Oceania</option>
+      </select>
+    </div>
+  </div>
   <div class="cards">
-    <app-country-card *ngFor="let country of countries|async" [country]="country"></app-country-card>
+    <app-country-card *ngFor="let country of filteredCountries" [country]="country" ></app-country-card>
   </div>
 </div>

@@ -36,6 +36,8 @@ export interface Country {
   gini?: Gini
 }
 
+
+
 export interface Name {
   common: string
   official: string

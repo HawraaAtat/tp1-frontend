@@ -8,8 +8,10 @@ import { CountryListComponent } from './countries/country-list/country-list.comp
 import {HttpClientModule} from "@angular/common/http";
 import { CountryCardComponent } from './countries/country-card/country-card.component';
 import { LoginComponent } from './autentication/login/login.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { SignupComponent } from './autentication/signup/signup.component';
+import { CountryDetailsComponent } from './countries/country-details/country-details.component';
+import { ImageGalleryComponent } from './countries/image-gallery/image-gallery.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { SignupComponent } from './autentication/signup/signup.component';
     CountryListComponent,
     CountryCardComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    CountryDetailsComponent,
+    ImageGalleryComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +29,8 @@ import { SignupComponent } from './autentication/signup/signup.component';
     AppRoutingModule,
     RouterOutlet,
     RouterLink,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
