@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import {CountryService} from "../shared/country/country.service";
-import {CountryInfo} from "../shared/models/contryInfo";
-import {Country} from "../shared/models/country";
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { CountryService } from '../shared/country/country.service';
+import { CountryInfo } from '../shared/models/contryInfo';
+import { Country } from '../shared/models/country';
+
 @Component({
   selector: 'app-country-details',
   templateUrl: './country-details.component.html',
@@ -16,8 +17,23 @@ export class CountryDetailsComponent implements OnInit {
 
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly countryService: CountryService
-  ) {}
+    private readonly countryService: CountryService,
+    private router: Router
+  ) {
+    // override the route reuse strategy
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
+
+    this.router.events.subscribe((evt) => {
+      if (evt instanceof NavigationEnd) {
+        // trick the Router into believing it's last link wasn't previously loaded
+        this.router.navigated = false;
+        // if you need to scroll back to top, here is the right place
+        window.scrollTo(0, 0);
+      }
+    });
+  }
 
   ngOnInit(): void {
     const cca3 = this.route.snapshot.paramMap.get('cca3');
@@ -39,7 +55,6 @@ export class CountryDetailsComponent implements OnInit {
         this.images = images;
         console.log('Images:', this.images);
       });
-
     });
   }
 }

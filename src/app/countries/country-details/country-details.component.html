@@ -16,19 +16,21 @@
         </ng-container>
       </ul>
 
+      <p><strong>Bordering Countries:</strong></p>
+      <div class="cards">
+          <app-country-card *ngFor="let border of borderingCountries" [country]="border"></app-country-card>
+      </div>
+
+      <p><strong>Images:</strong></p>
       <div *ngIf="images.length > 0">
         <h2>Image Gallery</h2>
         <app-image-gallery [images]="images"></app-image-gallery>
       </div>
 
 
-      <p><strong>Bordering Countries:</strong></p>
-      <div class="cards">
-        <app-country-card *ngFor="let country of borderingCountries" [country]="country" ></app-country-card>
-      </div>
   </div>
 </div>
 </div>
 
-<div>{{ country | json }}</div>
+<!--<div>{{ country | json }}</div>-->
 <!--<div>{{ country?.[0]?.name?.common }}</div>-->
