@@ -5,13 +5,14 @@ import {LoginComponent} from "./autentication/login/login.component";
 import {SignupComponent} from "./autentication/signup/signup.component";
 import {CountryDetailsComponent} from "./countries/country-details/country-details.component";
 import {ImageUploadComponent} from "./countries/image-upload/image-upload.component";
+import {AuthGuard} from "./autentication/guards/auth.guard";
 
 const routes: Routes = [
-  { path: '', component: CountryListComponent },
+  { path: '', component: CountryListComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'countries/:cca3', component: CountryDetailsComponent },
-  { path: 'upload', component: ImageUploadComponent },
+  { path: 'countries/:cca3', component: CountryDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'upload', component: ImageUploadComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
