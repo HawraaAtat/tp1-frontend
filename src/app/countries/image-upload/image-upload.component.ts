@@ -81,7 +81,6 @@ export class ImageUploadComponent {
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
-    console.log('Selected file:', this.selectedFile);
     // Read the contents of the selected file and convert it to a data URL
     if (this.selectedFile) {
       const reader = new FileReader();
@@ -94,7 +93,6 @@ export class ImageUploadComponent {
 
   onSubmit(event: any) {
     event.preventDefault();
-    console.log('Selected file:', this.selectedFile);
     // Perform some action with the selected file
   }
 

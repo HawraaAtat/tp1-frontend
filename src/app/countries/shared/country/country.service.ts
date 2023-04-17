@@ -34,7 +34,6 @@ export class CountryService {
     const url = `${environment.baseUrl}/alpha/${cca3}`;
     return this.http.get<CountryInfo[]>(url).pipe(
       catchError((error) => {
-        console.log('Error:', error);
         return throwError(error);
       })
     );
@@ -48,7 +47,6 @@ export class CountryService {
         const url = `https://api.unsplash.com/search/photos?query=${countryName}&per_page=10&client_id=${this.unsplashAccessKey}`;
         return this.http.get<{ results: { urls: { regular: string } }[] }>(url).pipe(
           catchError((error) => {
-            console.log('Error:', error);
             return throwError(error);
           }),
           tap((response) => {
@@ -62,7 +60,6 @@ export class CountryService {
                   url: result.urls.regular,
                 };
               } else {
-                console.log('Invalid result:', result);
                 return null;
               }
             }).filter((item) => item !== null) as { name: string; url: string }[];

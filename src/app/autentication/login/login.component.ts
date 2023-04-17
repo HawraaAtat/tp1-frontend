@@ -37,7 +37,6 @@ export class LoginComponent {
     let password = this.loginForm.get('password')?.value;
     this.authService.login(email,password).subscribe((data)=>{
 
-      console.log(data)
       localStorage.setItem('AccessToken', data.Login.AccessToken);
       localStorage.setItem('RefreshToken', data.Login.RefreshToken);
       this.router.navigate(['/']);

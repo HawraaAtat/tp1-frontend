@@ -25,7 +25,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const accessToken = this.authService.getAccessToken();
-    console.log('access token:', accessToken);
     if (accessToken && !request.url.includes('api.unsplash.com')) {
       request = request.clone({
         setHeaders: {
@@ -33,7 +32,6 @@ export class AuthInterceptor implements HttpInterceptor {
         }
       });
     }
-    console.log('request:', request);
     return next.handle(request);
   }
 

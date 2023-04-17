@@ -54,6 +54,16 @@ export class AuthService {
   //   );
   // }
 
+  getUser(): any {
+    const accessToken = this.getAccessToken();
+    if (!accessToken) {
+      return null;
+    }
+    const payload = accessToken.split('.')[1];
+    const decodedPayload = atob(payload);
+    return JSON.parse(decodedPayload);
+  }
+
 
   isLoggedIn(): Observable<boolean> {
     const accessToken = this.getAccessToken();

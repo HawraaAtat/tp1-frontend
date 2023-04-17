@@ -17,6 +17,8 @@ import {AuthService} from "./countries/shared/authentication/auth.service";
 import {AuthGuard} from "./autentication/guards/auth.guard";
 import {AuthInterceptor} from "./autentication/interceptor/auth.interceptor";
 import { NotFoundComponent } from './not-found/not-found.component';
+import {NgxPermissionsModule} from "ngx-permissions";
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     CountryDetailsComponent,
     ImageGalleryComponent,
     ImageUploadComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    UnauthorizedComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +41,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     RouterLink,
     ReactiveFormsModule,
     FormsModule,
+    NgxPermissionsModule.forRoot()
   ],
   providers: [
     AuthGuard,

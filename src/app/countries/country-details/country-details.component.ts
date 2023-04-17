@@ -5,6 +5,8 @@ import { CountryInfo } from '../shared/models/contryInfo';
 import { Country } from '../shared/models/country';
 import jwt_decode from "jwt-decode";
 import {Location} from "@angular/common";
+import {AuthService} from "../shared/authentication/auth.service";
+import {NgxPermissionsService} from "ngx-permissions";
 
 @Component({
   selector: 'app-country-details',
@@ -18,6 +20,8 @@ export class CountryDetailsComponent implements OnInit {
   images: { name: string; url: string }[] = [];
   username!: string;
 
+  isAdmin = false;
+
   // lightboxOpen = false;
   // currentImageIndex = 0;
 
@@ -27,7 +31,9 @@ export class CountryDetailsComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private readonly countryService: CountryService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private authService: AuthService,
+    private permissionsService: NgxPermissionsService
   ) {
     // override the route reuse strategy
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
@@ -52,7 +58,7 @@ export class CountryDetailsComponent implements OnInit {
     const cca3 = this.route.snapshot.paramMap.get('cca3');
     this.countryService.getCountryByCode(cca3!).subscribe((country) => {
       this.country = country;
-      console.log('Country:', this.country);
+
 
       // Get bordering countries
       if (this.country?.[0]?.borders) {
@@ -66,7 +72,6 @@ export class CountryDetailsComponent implements OnInit {
       // Get images for the country
       this.countryService.getImagesForCountry(cca3!).subscribe((images) => {
         this.images = images;
-        console.log('Images:', this.images);
       });
     });
 
@@ -74,6 +79,17 @@ export class CountryDetailsComponent implements OnInit {
     if (accessToken) {
       const decodedToken = jwt_decode(accessToken) as { given_name: string };
       this.username = decodedToken.given_name;
+    }
+
+
+    ////permission
+    const user = this.authService.getUser();
+    if (user && user.realm_access && user.realm_access.roles.find((role: string) => role === 'Admin')) {
+      this.isAdmin = true;
+      this.permissionsService.addPermission('ADMIN');
+    } else {
+      this.isAdmin = false;
+      this.permissionsService.removePermission('ADMIN');
     }
   }
 
@@ -84,5 +100,7 @@ export class CountryDetailsComponent implements OnInit {
   // closeLightbox(): void {
   //   this.lightboxOpen = false;
   // }
+
+
 
 }
