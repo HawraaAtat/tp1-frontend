@@ -12,6 +12,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { SignupComponent } from './autentication/signup/signup.component';
 import { CountryDetailsComponent } from './countries/country-details/country-details.component';
 import { ImageGalleryComponent } from './countries/image-gallery/image-gallery.component';
+import { ImageUploadComponent } from './countries/image-upload/image-upload.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ImageGalleryComponent } from './countries/image-gallery/image-gallery.c
     LoginComponent,
     SignupComponent,
     CountryDetailsComponent,
-    ImageGalleryComponent
+    ImageGalleryComponent,
+    ImageUploadComponent
   ],
   imports: [
     BrowserModule,

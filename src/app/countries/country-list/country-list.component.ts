@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Country } from '../shared/models/country';
 import jwt_decode from 'jwt-decode';
 import {Router} from "@angular/router";
+import {FilterTerms} from "../shared/models/FilterTerms";
 
 @Component({
   selector: 'app-country-list',
@@ -16,8 +17,18 @@ export class CountryListComponent implements OnInit {
   searchTerm: string = '';
   filterTerm: string[] = [];
   username!: string;
+  filterOpen: boolean = false;
 
   constructor(private readonly countryService: CountryService, private readonly router: Router) {}
+
+  filterTerms: FilterTerms = {
+    All: false,
+    Africa: false,
+    Americas: false,
+    Asia: false,
+    Europe: false,
+    Oceania: false
+  };
 
   ngOnInit(): void {
     this.countryService.getAllContries().subscribe((countries) => {
@@ -44,8 +55,8 @@ export class CountryListComponent implements OnInit {
   }
 
   filterCountries(): void {
-    if (this.filterTerm.length > 0) {
-      if (this.filterTerm.includes('All')) {
+    if (Object.values(this.filterTerms).some(value => value)) {
+      if (this.filterTerms.All) {
         if (this.searchTerm) {
           const filteredBySearch = this.countries.filter((country) =>
             country.name.common.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
@@ -56,7 +67,8 @@ export class CountryListComponent implements OnInit {
           this.filteredCountries = this.countries;
         }
       } else {
-        const filteredByRegion = this.countries.filter((country) => this.filterTerm.includes(country.region));
+        const selectedRegions = Object.keys(this.filterTerms).filter(key => this.filterTerms[key]);
+        const filteredByRegion = this.countries.filter((country) => selectedRegions.includes(country.region));
         const filteredBySearch = filteredByRegion.filter((country) =>
           country.name.common.toLowerCase().includes(this.searchTerm.toLowerCase())
         );
@@ -75,12 +87,21 @@ export class CountryListComponent implements OnInit {
     }
   }
 
+
   onSearch(): void {
     this.searchCountries();
   }
 
   onFilter(): void {
     this.filterCountries();
+    this.toggleFilter();
   }
+
+  toggleFilter(): void {
+    this.filterOpen = !this.filterOpen;
+    const filterButton = document.querySelector('.filter-button') as HTMLElement;
+    filterButton.classList.toggle('active');
+  }
+
 
 }

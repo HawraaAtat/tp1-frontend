@@ -4,12 +4,14 @@ import {CountryListComponent} from "./countries/country-list/country-list.compon
 import {LoginComponent} from "./autentication/login/login.component";
 import {SignupComponent} from "./autentication/signup/signup.component";
 import {CountryDetailsComponent} from "./countries/country-details/country-details.component";
+import {ImageUploadComponent} from "./countries/image-upload/image-upload.component";
 
 const routes: Routes = [
   { path: '', component: CountryListComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'countries/:cca3', component: CountryDetailsComponent },
+  { path: 'upload', component: ImageUploadComponent },
 ];
 
 @NgModule({

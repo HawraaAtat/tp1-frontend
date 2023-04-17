@@ -4,7 +4,7 @@
       <img style="width: 80px" src="/assets/logo_white.png" alt="countries logo">
       <div>
         <span class="d-flex justify-content-center align-items-center">
-          Hi, , {{ username }}<ion-icon class="m-2 align-self-center" name="person-circle-outline"></ion-icon>
+          Hi, {{ username }}<ion-icon class="m-2 align-self-center" name="person-circle-outline"></ion-icon>
         </span>
       </div>
     </div>
@@ -14,19 +14,50 @@
 <div class="container">
   <div class="d-flex flex-column flex-sm-row justify-content-between">
     <div>
-      <input type="text" [(ngModel)]="searchTerm" placeholder="Search by name or region" (input)="onSearch()">
+        <input id="search" type="text" [(ngModel)]="searchTerm" placeholder="Country" (input)="onSearch()">
+        <ion-icon class="search-icon" name="search-outline"></ion-icon>
     </div>
-    <div>
-      <select [(ngModel)]="filterTerm" multiple (change)="onFilter()">
-        <option value="All">All</option>
-        <option value="Africa">Africa</option>
-        <option value="Americas">Americas</option>
-        <option value="Asia">Asia</option>
-        <option value="Europe">Europe</option>
-        <option value="Oceania">Oceania</option>
-      </select>
+
+    <div class="filter-container">
+      <button class="filter-button" (click)="toggleFilter()">
+        <ion-icon name="funnel-outline"></ion-icon>
+      </button>
+
+      <div id="filter" [ngClass]="{ show: filterOpen }">
+        <strong><h5 style="color: #3C73CB; text-align: center">Filter by region</h5></strong>
+        <div class="checkbox-group">
+          <label>
+            <input type="checkbox" name="All" value="All" [(ngModel)]="filterTerms.All">
+            All
+          </label>
+          <label>
+            <input type="checkbox" name="Africa" value="Africa" [(ngModel)]="filterTerms.Africa">
+            Africa
+          </label>
+          <label>
+            <input type="checkbox" name="Americas" value="Americas" [(ngModel)]="filterTerms.Americas" >
+            Americas
+          </label>
+          <label>
+            <input type="checkbox" name="Asia" value="Asia" [(ngModel)]="filterTerms.Asia" >
+            Asia
+          </label>
+          <label>
+            <input type="checkbox" name="Europe" value="Europe" [(ngModel)]="filterTerms.Europe">
+            Europe
+          </label>
+          <label>
+            <input type="checkbox" name="Oceania" value="Oceania" [(ngModel)]="filterTerms.Oceania">
+            Oceania
+          </label>
+        </div>
+        <button class="submit-button" (click)="onFilter()">Submit</button>
+      </div>
     </div>
+
+
   </div>
+
   <div class="cards">
     <app-country-card *ngFor="let country of filteredCountries" [country]="country" ></app-country-card>
   </div>

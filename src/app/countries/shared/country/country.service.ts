@@ -11,6 +11,7 @@ import {CountryInfo} from "../models/contryInfo";
 })
 export class CountryService {
   private readonly  unsplashAccessKey = environment.unsplashAccessKey;
+  photos: { name: string; url: string }[] = [];
 
   constructor(private readonly http: HttpClient) {}
 
@@ -111,6 +112,23 @@ export class CountryService {
   //   );
   // }
 
+
+  addPhoto(formData: FormData): Observable<any> {
+    const url = `${environment.baseUrl}/photos`;
+    console.log(`${environment.baseUrl}/photos`);
+    return this.http.post<any>(url, formData).pipe(
+      catchError((error) => {
+        console.log('Error adding photo:', error);
+        return throwError(error);
+      }),
+      map(response => {
+        console.log(response);
+        const photo = { name: response.name, url: response.url };
+        this.photos.push(photo);
+        return photo;
+      })
+    );
+  }
 
 
 }

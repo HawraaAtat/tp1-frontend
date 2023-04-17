@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { CountryService } from '../shared/country/country.service';
 import { CountryInfo } from '../shared/models/contryInfo';
 import { Country } from '../shared/models/country';
+import jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-country-details',
@@ -14,6 +15,12 @@ export class CountryDetailsComponent implements OnInit {
   country?: CountryInfo[] = [];
   borderingCountries: CountryInfo[] = [];
   images: { name: string; url: string }[] = [];
+  username!: string;
+
+  // lightboxOpen = false;
+  // currentImageIndex = 0;
+
+
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -56,5 +63,20 @@ export class CountryDetailsComponent implements OnInit {
         console.log('Images:', this.images);
       });
     });
+
+    const accessToken = localStorage.getItem('AccessToken');
+    if (accessToken) {
+      const decodedToken = jwt_decode(accessToken) as { given_name: string };
+      this.username = decodedToken.given_name;
+    }
   }
+
+  // openLightbox(): void {
+  //   this.lightboxOpen = true;
+  // }
+  //
+  // closeLightbox(): void {
+  //   this.lightboxOpen = false;
+  // }
+
 }

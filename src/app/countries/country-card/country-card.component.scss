@@ -1,8 +1,6 @@
 .card-item{
   --gray:#919191;
   --black:#000;
-  height: 100%;
-  width: 350px;
   color: var(--black);
   background-color: white;
   border-radius: 0.5rem;
@@ -23,7 +21,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 100%;
+
+    width: 350px;
+    height: 100px;
   }
 
   .title {

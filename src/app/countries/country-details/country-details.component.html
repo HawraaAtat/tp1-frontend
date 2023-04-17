@@ -1,36 +1,78 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <img [src]="country?.[0]?.flags?.svg" class="img-fluid" alt="...">
+<div class="wrapper">
+  <div class="container mx-auto">
+    <div class="d-flex justify-content-between align-items-center">
+      <img style="width: 100px; margin-top: 10px " src="/assets/logo_white.png" alt="countries logo">
+      <div>
+        <span class="d-flex justify-content-center align-items-center" style="margin-top: 10px ">
+          Hi, {{username}} <ion-icon class="m-2 align-self-center" name="person-circle-outline"></ion-icon>
+        </span>
+      </div>
     </div>
-    <div class="col-md-6">
-      <h1>{{ country?.[0]?.name?.common }}</h1>
-      <p><strong>Capital:</strong> {{ country?.[0]?.capital }}</p>
-      <p><strong>Population:</strong> {{ country?.[0]?.population | number }}</p>
-      <p><strong>Languages:</strong></p>
-      <ul>
-        <ng-container *ngIf="country?.[0]?.languages">
-          <li *ngFor="let lang of Object.values(country?.[0]?.languages || {})">
-            {{ lang }}
-          </li>
-        </ng-container>
-      </ul>
+  </div>
+</div>
+<br>
 
-      <p><strong>Bordering Countries:</strong></p>
-      <div class="cards">
-          <app-country-card *ngFor="let border of borderingCountries" [country]="border"></app-country-card>
+
+<div class="container">
+
+  <div class="card-header">
+    <div class="card-header-bar">
+      <a routerLink="/" class="btn btn-back"><ion-icon name="chevron-back-outline"></ion-icon> Back</a>
+      <a routerLink="/upload" style="padding: 5px 10px;">Edit</a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+
+      <div class="card flag-card">
+        <div class="card-body">
+          <div class="d-flex align-items-center flex-column">
+            <img [src]="country?.[0]?.flags?.svg" class="flag-img mb-3" alt="...">
+            <div>
+              <h4 style="font-weight: bold;" class="card-title">{{ country?.[0]?.name?.common }}</h4>
+              <p style="text-align: center" class="card-text">{{ country?.[0]?.capital?.[0] }}</p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <p><strong>Images:</strong></p>
-      <div *ngIf="images.length > 0">
-        <h2>Image Gallery</h2>
-        <app-image-gallery [images]="images"></app-image-gallery>
+    </div>
+
+
+    <div class="col-md-8">
+
+
+      <div class="card info-card">
+        <div class="card-body">
+          <h4 style="font-weight: bold;">Information</h4>
+          <br>
+          <p><strong>Population:</strong> {{ country?.[0]?.population | number }}</p>
+          <p><strong>Spoken languages:</strong> {{ country?.[0]?.languages ? Object.values(country?.[0]?.languages || {}).join(', ') : '-' }}</p>
+        </div>
+
       </div>
 
+
+      <br>
+      <div class="card images-card">
+        <div class="card-body">
+          <h4 style="font-weight: bold;">Gallery</h4>
+          <app-image-gallery [images]="images"></app-image-gallery>
+        </div>
+      </div>
+
+
+    </div>
+
+
+    <div class="container">
+      <h4 style="font-weight: bold; margin-bottom: 1.5rem;">Bordering Countries</h4>
+      <div class="cards border-countries">
+        <app-country-card *ngFor="let border of borderingCountries" [country]="border"></app-country-card>
+      </div>
+    </div>
 
   </div>
 </div>
-</div>
 
-<!--<div>{{ country | json }}</div>-->
-<!--<div>{{ country?.[0]?.name?.common }}</div>-->
