@@ -143,7 +143,7 @@
   transition: background-color 0.2s ease-in-out;
 }
 
-.submit-button:hover {
+.submit-button:hover, .submit-button:active,.submit-button:focus {
   background-color: #29569a;
   color: white;
 }

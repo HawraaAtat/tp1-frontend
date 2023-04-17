@@ -4,6 +4,7 @@ import { CountryService } from '../shared/country/country.service';
 import { CountryInfo } from '../shared/models/contryInfo';
 import { Country } from '../shared/models/country';
 import jwt_decode from "jwt-decode";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-country-details',
@@ -25,7 +26,8 @@ export class CountryDetailsComponent implements OnInit {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly countryService: CountryService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {
     // override the route reuse strategy
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
@@ -40,6 +42,10 @@ export class CountryDetailsComponent implements OnInit {
         window.scrollTo(0, 0);
       }
     });
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   ngOnInit(): void {

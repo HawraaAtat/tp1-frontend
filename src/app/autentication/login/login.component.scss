@@ -1,6 +1,6 @@
 .page {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
 
   @media (max-width: 768px) {
     justify-content: center;
