@@ -5,6 +5,7 @@ import { Country } from '../shared/models/country';
 import jwt_decode from 'jwt-decode';
 import {Router} from "@angular/router";
 import {FilterTerms} from "../shared/models/FilterTerms";
+import {AuthService} from "../shared/authentication/auth.service";
 
 @Component({
   selector: 'app-country-list',
@@ -19,7 +20,7 @@ export class CountryListComponent implements OnInit {
   username!: string;
   filterOpen: boolean = false;
 
-  constructor(private readonly countryService: CountryService, private readonly router: Router) {}
+  constructor(private readonly countryService: CountryService, private readonly router: Router, private authService: AuthService) {}
 
   filterTerms: FilterTerms = {
     All: false,
@@ -101,6 +102,11 @@ export class CountryListComponent implements OnInit {
     this.filterOpen = !this.filterOpen;
     const filterButton = document.querySelector('.filter-button') as HTMLElement;
     filterButton.classList.toggle('active');
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
 
