@@ -16,7 +16,6 @@ export class CountryListComponent implements OnInit {
   countries: Country[] = [];
   filteredCountries: Country[] = [];
   searchTerm: string = '';
-  filterTerm: string[] = [];
   username!: string;
   filterOpen: boolean = false;
 

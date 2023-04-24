@@ -1,24 +1,29 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxPermissionsModule } from 'ngx-permissions';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
-import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import {RouterLink, RouterOutlet} from "@angular/router";
-import { CountryListComponent } from './countries/country-list/country-list.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import { CountryCardComponent } from './countries/country-card/country-card.component';
+import { AppComponent } from './app.component';
+import { AuthGuard } from './autentication/guards/auth.guard';
+import { AuthInterceptor } from './autentication/interceptor/auth.interceptor';
 import { LoginComponent } from './autentication/login/login.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { SignupComponent } from './autentication/signup/signup.component';
+import { CountryCardComponent } from './countries/country-card/country-card.component';
 import { CountryDetailsComponent } from './countries/country-details/country-details.component';
+import { CountryListComponent } from './countries/country-list/country-list.component';
 import { ImageGalleryComponent } from './countries/image-gallery/image-gallery.component';
 import { ImageUploadComponent } from './countries/image-upload/image-upload.component';
-import {AuthService} from "./countries/shared/authentication/auth.service";
-import {AuthGuard} from "./autentication/guards/auth.guard";
-import {AuthInterceptor} from "./autentication/interceptor/auth.interceptor";
+import { AuthService } from './countries/shared/authentication/auth.service';
+import { reducers } from './NGRX/store';
+import { RegionEffects } from './NGRX/store/region.effects';
 import { NotFoundComponent } from './not-found/not-found.component';
-import {NgxPermissionsModule} from "ngx-permissions";
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { RegionsComponent } from './NGRX/regions/regions.component';
 
 @NgModule({
   declarations: [
@@ -31,17 +36,19 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
     ImageGalleryComponent,
     ImageUploadComponent,
     NotFoundComponent,
-    UnauthorizedComponent
+    UnauthorizedComponent,
+    RegionsComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
-    AppRoutingModule,
-    RouterOutlet,
-    RouterLink,
     ReactiveFormsModule,
     FormsModule,
-    NgxPermissionsModule.forRoot()
+    NgxPermissionsModule.forRoot(),
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([RegionEffects]),
+    AppRoutingModule
   ],
   providers: [
     AuthGuard,
@@ -51,4 +58,4 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

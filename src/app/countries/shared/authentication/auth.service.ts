@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpEvent, HttpHeaders} from '@angular/common/http';
 import {catchError, map, Observable, of, tap, throwError} from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import {RefreshTokenResponse} from "../models/RefreshTokenResponse";
 
 
 @Injectable({
@@ -31,28 +32,36 @@ export class AuthService {
     localStorage.removeItem('RefreshToken');
   }
 
+  refreshToken(): Observable<RefreshTokenResponse> {
+    const refreshToken = this.getRefreshToken();
+    const body = { refreshToken };
+    return this.http.post<RefreshTokenResponse>('http://173.249.40.235:5005/api/User/RefreshToken()', body).pipe(
+      tap((response) => {
+        this.setAccessToken(response.AccessToken);
+      })
+    );
+  }
 
-  // refreshToken(): Observable<HttpEvent<any>> {
-  //   const refreshToken = this.getRefreshToken();
-  //   const body = {
-  //     grant_type: 'refresh_token',
-  //     refresh_token: refreshToken
-  //   };
-  //   const headers = new HttpHeaders({
-  //     'Content-Type': 'application/x-www-form-urlencoded',
-  //     Authorization: `Basic ${btoa(`${clientId}:${clientSecret}`)}`
-  //   });
-  //   return this.http.post<any>(`${this.apiUrl}/token`, body, { headers }).pipe(
-  //     tap((data) => {
-  //       const accessToken = data.access_token;
-  //       const refreshToken = data.refresh_token;
-  //       localStorage.setItem('AccessToken', accessToken);
-  //       localStorage.setItem('RefreshToken', refreshToken);
-  //     }),
-  //     map((data) => new HttpResponse({ body: data })),
-  //     catchError((error) => throwError(error))
-  //   );
-  // }
+
+  setAccessToken(accessToken: string): void {
+    // localStorage.removeItem('AccessToken');
+    localStorage.setItem('AccessToken', accessToken);
+  }
+
+
+  isAccessTokenExpired(): boolean {
+    const accessToken = this.getAccessToken();
+    if (!accessToken) {
+      return true;
+    }
+    const payload = accessToken.split('.')[1];
+    const decodedPayload = atob(payload);
+    const decodedToken = JSON.parse(decodedPayload);
+    const expirationTime = decodedToken.exp * 1000;
+    console.log(expirationTime);
+    return Date.now() > expirationTime;
+  }
+
 
   getUser(): any {
     const accessToken = this.getAccessToken();

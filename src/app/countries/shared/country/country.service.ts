@@ -25,11 +25,6 @@ export class CountryService {
     return this.http.get<Country[]>(url);
   }
 
-  filterCountries(region: string): Observable<Country[]> {
-    const url = `${environment.baseUrl}/region/${region}`;
-    return this.http.get<Country[]>(url);
-  }
-
   getCountryByCode(cca3: string): Observable<CountryInfo[]> {
     const url = `${environment.baseUrl}/alpha/${cca3}`;
     return this.http.get<CountryInfo[]>(url).pipe(
@@ -68,64 +63,5 @@ export class CountryService {
       })
     );
   }
-
-  // getImagesForCountry(cca3: string): Observable<{ name: string; url: string }[]> {
-  //   return this.getCountryByCode(cca3).pipe(
-  //     switchMap((countryInfo) => {
-  //       const countryName = countryInfo[0].name.common;
-  //       const unsplashUrl = `https://api.unsplash.com/search/photos?query=${countryName}&per_page=10&client_id=${this.unsplashAccessKey}`;
-  //       const adminImagesUrl = `https://your-image-hosting-service.com/images/${cca3}`;
-  //       const unsplashImages$ = this.http.get<{ results: { urls: { regular: string } }[] }>(unsplashUrl).pipe(
-  //         catchError((error) => {
-  //           console.log('Error:', error);
-  //           return throwError(error);
-  //         }),
-  //         map((response) => {
-  //           return response.results.map((result) => {
-  //             if (result.urls && result.urls.regular) {
-  //               return {
-  //                 name: result.urls.regular,
-  //                 url: result.urls.regular,
-  //               };
-  //             } else {
-  //               console.log('Invalid result:', result);
-  //               return null;
-  //             }
-  //           }).filter((item) => item !== null) as { name: string; url: string }[];
-  //         })
-  //       );
-  //       const adminImages$ = this.http.get<{ name: string; url: string }[]>(adminImagesUrl).pipe(
-  //         catchError((error) => {
-  //           console.log('Error:', error);
-  //           return of([]);
-  //         })
-  //       );
-  //       return forkJoin([unsplashImages$, adminImages$]).pipe(
-  //         map(([unsplashImages, adminImages]) => {
-  //           return [...unsplashImages, ...adminImages];
-  //         })
-  //       );
-  //     })
-  //   );
-  // }
-
-
-  // addPhoto(formData: FormData): Observable<any> {
-  //   const url = `${environment.baseUrl}/photos`;
-  //   console.log(`${environment.baseUrl}/photos`);
-  //   return this.http.post<any>(url, formData).pipe(
-  //     catchError((error) => {
-  //       console.log('Error adding photo:', error);
-  //       return throwError(error);
-  //     }),
-  //     map(response => {
-  //       console.log(response);
-  //       const photo = { name: response.name, url: response.url };
-  //       this.photos.push(photo);
-  //       return photo;
-  //     })
-  //   );
-  // }
-
 
 }
