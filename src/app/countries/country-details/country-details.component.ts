@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { CountryService } from '../shared/country/country.service';
-import { CountryInfo } from '../shared/models/contryInfo';
-import { Country } from '../shared/models/country';
+import { CountryService } from '../../shared/country/country.service';
+import { CountryInfo } from '../../shared/models/contryInfo';
+import { Country } from '../../shared/models/country';
 import jwt_decode from "jwt-decode";
 import {Location} from "@angular/common";
-import {AuthService} from "../shared/authentication/auth.service";
+import {AuthService} from "../../shared/authentication/auth.service";
 import {NgxPermissionsService} from "ngx-permissions";
 
 @Component({
@@ -24,6 +24,9 @@ export class CountryDetailsComponent implements OnInit {
 
   // lightboxOpen = false;
   // currentImageIndex = 0;
+  isLoading = false;
+  showLogout: boolean = true;
+
 
 
 
@@ -70,8 +73,10 @@ export class CountryDetailsComponent implements OnInit {
       }
 
       // Get images for the country
+      this.isLoading = true;
       this.countryService.getImagesForCountry(cca3!).subscribe((images) => {
         this.images = images;
+        this.isLoading = false
       });
     });
 
@@ -92,6 +97,11 @@ export class CountryDetailsComponent implements OnInit {
       this.permissionsService.removePermission('ADMIN');
     }
   }
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+
 
   // openLightbox(): void {
   //   this.lightboxOpen = true;

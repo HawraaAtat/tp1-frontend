@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, NgForm, Validators} from "@angular/forms";
-import {AuthService} from "../../countries/shared/authentication/auth.service";
+import {AuthService} from "../../shared/authentication/auth.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -10,6 +10,10 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  networkError = false;
+  loading = false;
+
+
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService,private router: Router) {
     this.loginForm = this.formBuilder.group({
@@ -24,23 +28,35 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    this.networkError = false; // reset network error status
+    const email = this.loginForm.get('username')?.value;
+    const password = this.loginForm.get('password')?.value;
+    if (!email || !password) {
+      return;
+    }
     if (this.loginForm.invalid) {
-      console.log("invalid")
       // mark all form controls as touched to display the error messages
-      Object.keys(this.loginForm.controls).forEach(key => {
+      Object.keys(this.loginForm.controls).forEach((key) => {
         this.loginForm.get(key)?.markAsTouched();
       });
       return;
     }
 
-    let email = this.loginForm.get('username')?.value;
-    let password = this.loginForm.get('password')?.value;
-    this.authService.login(email,password).subscribe((data)=>{
-
-      localStorage.setItem('AccessToken', data.Login.AccessToken);
-      localStorage.setItem('RefreshToken', data.Login.RefreshToken);
-      this.router.navigate(['/']);
+    this.loading = true;
+    this.authService.login(email, password).subscribe(
+      (data) => {
+        localStorage.setItem('AccessToken', data.Login.AccessToken);
+        localStorage.setItem('RefreshToken', data.Login.RefreshToken);
+        this.router.navigate(['/']);
+      },
+      (error) => {
+        this.networkError = true;
+      }
+    ).add(() => {
+      // set loading to false after the subscription completes (either success or error)
+      this.loading = false;
     });
   }
+
 
 }

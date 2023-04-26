@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CountryService } from '../shared/country/country.service';
+import { CountryService } from '../../shared/country/country.service';
 import { Observable } from 'rxjs';
-import { Country } from '../shared/models/country';
+import { Country } from '../../shared/models/country';
 import jwt_decode from 'jwt-decode';
 import {Router} from "@angular/router";
-import {FilterTerms} from "../shared/models/FilterTerms";
-import {AuthService} from "../shared/authentication/auth.service";
+import {FilterTerms} from "../../shared/models/FilterTerms";
+import {AuthService} from "../../shared/authentication/auth.service";
 
 @Component({
   selector: 'app-country-list',
@@ -16,11 +16,12 @@ export class CountryListComponent implements OnInit {
   countries: Country[] = [];
   filteredCountries: Country[] = [];
   searchTerm: string = '';
-  filterTerm: string[] = [];
   username!: string;
   filterOpen: boolean = false;
+  showLogout: boolean = true;
 
-  constructor(private readonly countryService: CountryService, private readonly router: Router, private authService: AuthService) {}
+  constructor(private readonly countryService: CountryService, private readonly router: Router, private authService: AuthService) {
+  }
 
   filterTerms: FilterTerms = {
     All: false,
@@ -109,5 +110,8 @@ export class CountryListComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  get isLoading(): boolean {
+    return this.countryService.isLoading;
+  }
 
 }

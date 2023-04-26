@@ -15,6 +15,24 @@
   margin-left: 40px;
 
 
+  .name {
+    display: flex;
+    justify-content: space-between;
+    width: 99%;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .danger{
+      color: red; font-size: 12px; margin-top: 15px; margin-left: 5px;
+      @media (max-width: 768px) {
+        margin-top: 0;
+      }
+    }
+  }
+
   img {
     margin-bottom: 30px;
 
@@ -26,6 +44,7 @@
 
   h1 {
     font-weight: 600;
+    font-size: 2.5rem;
   }
 
   p {
@@ -94,18 +113,58 @@
   mask-image: linear-gradient(to right, transparent, white);
 }
 
-@media (max-width: 1290px) {
+@media (max-width: 1200px) {
   .background {
     width: 400px;
   }
 }
-@media (max-width: 998px) {
+@media (max-width: 1024px) {
   .background {
-    width: 300px;
+    width: 50%;
   }
 }
-@media (max-width: 886px) {
+@media (max-width: 768px) {
   .background {
-    width: 0px;
+    width: 50%;
+  }
+  .container{
+    margin-left: 0;
+    padding: 10px;
+    width: 80%;
+    img{
+      margin-bottom:30px;
+    }
+    h1 {
+      font-weight: 600;
+      font-size: 30px;
+    }
+  }
+}
+@media (max-width: 480px) and (orientation: landscape) {
+  .background {
+    width: 50%;
+  }
+  .container{
+    margin-left: 0;
+    padding: 10px;
+    width: 100%;
+    h1 {
+      font-weight: 600;
+      font-size: 30px;
+    }
+  }
+}
+@media (max-width: 320px) and (orientation: portrait) {
+  .background {
+    width: 0;
+  }
+  .container{
+    margin-left: 0;
+    padding: 10px;
+    width: 100%;
+    h1 {
+      font-weight: 600;
+      font-size: 20px;
+    }
   }
 }

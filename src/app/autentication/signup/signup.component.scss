@@ -101,11 +101,6 @@
     align-items: flex-start;
     margin-top: 15px;
   }
-  .error-message {
-    color: red;
-    font-size: 14px;
-    margin-top: 5px;
-  }
 
   button {
     margin-left: auto;
@@ -148,18 +143,95 @@
   mask-image: linear-gradient(to right, transparent, white);
 }
 
-@media (max-width: 1290px) {
+
+
+
+/* Mobile Phones in Portrait Mode (less than 320px) */
+@media only screen and (max-width: 320px) {
+  .container {
+    width: 100%;
+    margin-left: 0;
+    padding: 10px;
+    font-size: 14px;
+  }
+
   .background {
-    width: 400px;
+    display: none;
   }
 }
-@media (max-width: 998px) {
+
+/* Mobile Phones in Landscape Mode (between 321px and 480px) */
+@media only screen and (min-width: 321px) and (max-width: 480px) {
+  .container {
+    width: 100%;
+    margin-left: 0;
+    padding: 10px;
+    font-size: 14px;
+
+    h1{
+      font-weight: 600;
+      font-size: 30px;
+    }
+    p{
+      font-weight: 500;
+      font-size: 1rem;
+    }
+  }
+
   .background {
-    width: 300px;
+    width: 50%;
   }
 }
-@media (max-width: 910px) {
+
+/* Tablets in Portrait Mode (between 481px and 768px) */
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+  .container {
+    width: 100%;
+    margin-left: 0;
+    padding: 15px;
+    h1{
+      font-weight: 600;
+      font-size: 30px;
+    }
+    p{
+      font-weight: 500;
+      font-size: 1rem;
+    }
+  }
+
   .background {
-    width: 0px;
+    width: 50%;
+  }
+}
+
+/* Tablets in Landscape Mode (between 769px and 1024px) */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    padding: 20px;
+    font-size: 18px;
+    width: 98%;
+  }
+  .container .name {
+    width: 98%;
+  }
+  .container form{
+    width: 60%;
+  }
+  .background {
+    width: 50%;
+  }
+}
+
+/* Desktop Screens (greater than 1024px) */
+@media only screen and (min-width: 1025px) {
+  .container {
+    width: 550px;
+    margin-left: 40px;
+    padding: 20px;
+    font-size: 16px;
+  }
+
+  .background {
+    width: 600px;
   }
 }

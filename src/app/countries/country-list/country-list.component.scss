@@ -30,6 +30,36 @@
       rgba(0, 0, 0, 0)
   );
 }
+.logout-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.logout-button {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+}
+
+.username:hover + .logout-button,
+.logout-button:hover {
+  display: block;
+}
+
+.logout-button {
+  display: none;
+  background: rgba(154, 41, 41, 0.65);
+  border: none;
+  color: white;
+  font-size: 12px;
+}
+
+.user-info:hover .logout-button {
+  display: block;
+}
+
 
 .container {
   position: relative;
@@ -171,41 +201,63 @@
   background-color: transparent;
   color: #fff;
 }
+.user-icon{
+  margin: 0 !important;
+  margin-left: 0.5rem !important;
+}
 
 
-
-@media screen and (max-width: 576px) {
+/* Mobile Phones: Portrait */
+@media screen and (max-width: 320px) {
   #filter {
     left: 10px;
   }
+  .search-icon {
+    left: 57%;
+  }
 }
 
+/* Mobile Phones: Landscape */
+@media screen and (min-width: 321px) and (max-width: 480px) {
+  .cards {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    justify-content: center;
+  }
+  .search-icon {
+    left: 64%;
+  }
+  .container {
+    width: 90%;
+  }
+  #filter{
+    left: 0;
+  }
+}
 
-@media screen and (min-width: 823px) and (max-width: 991px) {
+/* Tablets: Portrait */
+@media screen and (min-width: 481px) and (max-width: 767px) {
+  .cards {
+    grid-template-columns: repeat(1, minmax(250px, 1fr));
+    justify-content: center;
+  }
+  #filter{
+    left: 0;
+  }
+
+}
+
+/* Tablets: Landscape */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
   .cards {
     grid-template-columns: repeat(2, minmax(250px, 1fr));
     justify-content: center;
   }
 }
 
-@media screen and (min-width: 992px) and (max-width: 1204px) {
-  .cards {
-    grid-template-columns: repeat(2, minmax(250px, 1fr));
-    justify-content: center;
-    margin:  0 auto;
-  }
-}
-
-@media screen and (min-width: 1205px) {
+/* Desktop Screens */
+@media screen and (min-width: 1024px) and (max-width: 1200px) {
   .cards {
     grid-template-columns: repeat(3, minmax(250px, 1fr));
     justify-content: center;
-  }
-}
-
-@media screen and (max-width: 822px) {
-  .cards {
-    grid-template-columns: 1fr;
-    justify-items: center;
   }
 }
