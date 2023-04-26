@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {catchError, map, Observable, switchMap, tap, throwError} from 'rxjs';
+import {catchError, finalize, map, Observable, switchMap, tap, throwError} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Country } from '../models/country';
 import {CountryInfo} from "../models/contryInfo";
@@ -12,25 +12,33 @@ import {CountryInfo} from "../models/contryInfo";
 export class CountryService {
   private readonly  unsplashAccessKey = environment.unsplashAccessKey;
   photos: { name: string; url: string }[] = [];
+  isLoading: boolean =false;
 
   constructor(private readonly http: HttpClient) {}
 
   getAllContries(): Observable<Country[]> {
     const url = `${environment.baseUrl}/all`;
-    return this.http.get<Country[]>(url);
+    return this.http.get<Country[]>(url).pipe(
+      finalize(() => this.isLoading = false)
+    );
   }
 
   searchCountries(name: string): Observable<Country[]> {
     const url = `${environment.baseUrl}/name/${name}`;
-    return this.http.get<Country[]>(url);
+    this.isLoading = true;
+    return this.http.get<Country[]>(url).pipe(
+      finalize(() => this.isLoading = false)
+    );
   }
 
   getCountryByCode(cca3: string): Observable<CountryInfo[]> {
     const url = `${environment.baseUrl}/alpha/${cca3}`;
+    this.isLoading = true;
     return this.http.get<CountryInfo[]>(url).pipe(
       catchError((error) => {
         return throwError(error);
-      })
+      }),
+      finalize(() => this.isLoading = false)
     );
   }
 

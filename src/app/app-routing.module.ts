@@ -13,8 +13,8 @@ import {RegionsComponent} from "./NGRX/regions/regions.component";
 
 const routes: Routes = [
   { path: '', component: CountryListComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard]  },
+  { path: 'signup', component: SignupComponent, canActivate: [AuthGuard] },
   { path: 'countries/:cca3', component: CountryDetailsComponent, canActivate: [AuthGuard] },
   { path: 'upload', component: ImageUploadComponent, canActivate: [AdminGuard] },
   { path: 'unauthorized', component: UnauthorizedComponent },

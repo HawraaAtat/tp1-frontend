@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { CountryService } from '../shared/country/country.service';
-import { CountryInfo } from '../shared/models/contryInfo';
-import { Country } from '../shared/models/country';
+import { CountryService } from '../../shared/country/country.service';
+import { CountryInfo } from '../../shared/models/contryInfo';
+import { Country } from '../../shared/models/country';
 import jwt_decode from "jwt-decode";
 import {Location} from "@angular/common";
-import {AuthService} from "../shared/authentication/auth.service";
+import {AuthService} from "../../shared/authentication/auth.service";
 import {NgxPermissionsService} from "ngx-permissions";
 
 @Component({
@@ -24,6 +24,7 @@ export class CountryDetailsComponent implements OnInit {
 
   // lightboxOpen = false;
   // currentImageIndex = 0;
+  isLoading = false;
 
 
 
@@ -70,8 +71,10 @@ export class CountryDetailsComponent implements OnInit {
       }
 
       // Get images for the country
+      this.isLoading = true;
       this.countryService.getImagesForCountry(cca3!).subscribe((images) => {
         this.images = images;
+        this.isLoading = false
       });
     });
 

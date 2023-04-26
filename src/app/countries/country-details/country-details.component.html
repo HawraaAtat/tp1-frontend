@@ -59,7 +59,9 @@
       <div class="card images-card">
         <div class="card-body">
           <h4 style="font-weight: bold;">Gallery</h4>
-          <app-image-gallery [images]="images"></app-image-gallery>
+          <app-loader *ngIf="isLoading"> </app-loader>
+          <app-image-gallery *ngIf="!isLoading" [images]="images"></app-image-gallery>
+
         </div>
       </div>
 

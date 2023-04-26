@@ -1,0 +1,9 @@
+<div class="region" [class.selected]="isSelected()" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+  <h3>{{ region }}</h3>
+  <div class="regions">
+    <app-regions *ngFor="let r of regions" [region]="r"></app-regions>
+  </div>
+  <ul class="countries">
+    <li *ngFor="let country of countries$ | async" draggable="true" (dragstart)="onDragStart($event, country.name.common)">{{ country.name.common }}</li>
+  </ul>
+</div>

@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {Country} from "../shared/models/country";
+import {Country} from "../../shared/models/country";
 
 @Component({
   selector: 'app-country-card',

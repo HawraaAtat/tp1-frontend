@@ -18,12 +18,13 @@ import { CountryDetailsComponent } from './countries/country-details/country-det
 import { CountryListComponent } from './countries/country-list/country-list.component';
 import { ImageGalleryComponent } from './countries/image-gallery/image-gallery.component';
 import { ImageUploadComponent } from './countries/image-upload/image-upload.component';
-import { AuthService } from './countries/shared/authentication/auth.service';
+import { AuthService } from './shared/authentication/auth.service';
 import { reducers } from './NGRX/store';
 import { RegionEffects } from './NGRX/store/region.effects';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { RegionsComponent } from './NGRX/regions/regions.component';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { RegionsComponent } from './NGRX/regions/regions.component';
     ImageUploadComponent,
     NotFoundComponent,
     UnauthorizedComponent,
-    RegionsComponent
+    RegionsComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

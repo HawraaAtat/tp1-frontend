@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CountryService } from '../shared/country/country.service';
+import { CountryService } from '../../shared/country/country.service';
 import jwt_decode from "jwt-decode";
 import { Location } from '@angular/common';
 
