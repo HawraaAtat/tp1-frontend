@@ -58,7 +58,8 @@ export class AuthService {
     const decodedPayload = atob(payload);
     const decodedToken = JSON.parse(decodedPayload);
     const expirationTime = decodedToken.exp * 1000;
-    console.log(expirationTime);
+    // console.log(expirationTime);
+    // console.log('expirationTime',Date.now() > expirationTime);
     return Date.now() > expirationTime;
   }
 

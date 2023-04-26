@@ -4,21 +4,12 @@
       <a routerLink="/"><img style="width: 80px" src="/assets/logo_white.png" alt="countries logo"></a>
       <div>
         <div *ngIf="username">
-<!--        <button class="transparent" (click)="logout()">-->
-<!--        <span class="d-flex justify-content-center align-items-center">-->
-<!--          Hi, {{ username }}<ion-icon class="m-2 align-self-center" name="person-circle-outline"></ion-icon>-->
-<!--        </span>-->
-<!--        </button>-->
-
-
           <div class="logout-wrapper">
             <span class="username" (mouseover)="showLogout = true" (mouseleave)="showLogout = true">
               Hi, {{ username }}<ion-icon class="m-2 align-self-center user-icon" name="person-circle-outline"></ion-icon>
             </span>
             <button class="logout-button" *ngIf="showLogout" (click)="logout()">Logout</button>
           </div>
-
-
         </div>
       </div>
     </div>
@@ -73,14 +64,14 @@
   </div>
 
 
-<!--  <div *ngIf="isLoading" class="cards">-->
-<!--    <app-country-card *ngFor="let country of filteredCountries" [country]="country" ></app-country-card>-->
-<!--  </div>-->
-  <div class="cards">
+  <div *ngIf="!isLoading" class="cards">
     <app-country-card *ngFor="let country of filteredCountries" [country]="country" ></app-country-card>
   </div>
+<!--  <div class="cards">-->
+<!--    <app-country-card *ngFor="let country of filteredCountries" [country]="country" ></app-country-card>-->
+<!--  </div>-->
 
-<!--  <app-loader *ngIf="isLoading"></app-loader>-->
+  <app-loader *ngIf="isLoading"></app-loader>
 
 
 </div>

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CountryService } from '../../shared/country/country.service';
 import jwt_decode from "jwt-decode";
 import { Location } from '@angular/common';
+import {Router} from "@angular/router";
+import {AuthService} from "../../shared/authentication/auth.service";
 
 @Component({
   selector: 'app-image-upload',
@@ -12,12 +14,14 @@ import { Location } from '@angular/common';
 export class ImageUploadComponent {
   photoForm!: FormGroup;
   username!: string;
-
+  showLogout: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
     private countryService: CountryService,
-    private location: Location
+    private location: Location,
+    private readonly router: Router,
+    private authService: AuthService
   ) {}
 
 
@@ -95,6 +99,12 @@ export class ImageUploadComponent {
     event.preventDefault();
     // Perform some action with the selected file
   }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+
 
 
 }

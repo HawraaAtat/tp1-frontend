@@ -19,9 +19,9 @@ export class CountryListComponent implements OnInit {
   username!: string;
   filterOpen: boolean = false;
   showLogout: boolean = true;
-  // isLoading: boolean =true;
 
-  constructor(private readonly countryService: CountryService, private readonly router: Router, private authService: AuthService) {}
+  constructor(private readonly countryService: CountryService, private readonly router: Router, private authService: AuthService) {
+  }
 
   filterTerms: FilterTerms = {
     All: false,
@@ -110,6 +110,8 @@ export class CountryListComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-
+  get isLoading(): boolean {
+    return this.countryService.isLoading;
+  }
 
 }

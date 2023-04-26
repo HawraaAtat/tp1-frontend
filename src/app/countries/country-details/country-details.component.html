@@ -2,10 +2,13 @@
   <div class="container mx-auto">
     <div class="d-flex justify-content-between align-items-center">
       <a routerLink="/"><img style="width: 100px; margin-top: 10px " src="/assets/logo_white.png" alt="countries logo"></a>
-      <div>
-        <span class="d-flex justify-content-center align-items-center" style="margin-top: 10px ">
-          Hi, {{username}} <ion-icon class="m-2 align-self-center" name="person-circle-outline"></ion-icon>
-        </span>
+      <div *ngIf="username">
+        <div class="logout-wrapper">
+            <span class="username" (mouseover)="showLogout = true" (mouseleave)="showLogout = true">
+              Hi, {{ username }}<ion-icon class="m-2 align-self-center user-icon" name="person-circle-outline"></ion-icon>
+            </span>
+          <button class="logout-button" *ngIf="showLogout" (click)="logout()">Logout</button>
+        </div>
       </div>
     </div>
   </div>

@@ -25,6 +25,8 @@ export class CountryDetailsComponent implements OnInit {
   // lightboxOpen = false;
   // currentImageIndex = 0;
   isLoading = false;
+  showLogout: boolean = true;
+
 
 
 
@@ -95,6 +97,11 @@ export class CountryDetailsComponent implements OnInit {
       this.permissionsService.removePermission('ADMIN');
     }
   }
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+
 
   // openLightbox(): void {
   //   this.lightboxOpen = true;

@@ -17,11 +17,13 @@ export class CountryService {
   constructor(private readonly http: HttpClient) {}
 
   getAllContries(): Observable<Country[]> {
+    this.isLoading = true;
     const url = `${environment.baseUrl}/all`;
     return this.http.get<Country[]>(url).pipe(
       finalize(() => this.isLoading = false)
     );
   }
+
 
   searchCountries(name: string): Observable<Country[]> {
     const url = `${environment.baseUrl}/name/${name}`;
